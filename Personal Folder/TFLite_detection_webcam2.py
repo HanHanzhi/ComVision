@@ -100,6 +100,31 @@ def usecamera(videotimer):
 
     args = parser.parse_args()
 
+    def distanceestimate(k2, k1):
+        height = k2-k1
+        if (height>504):
+            return (150)
+        elif (352 < height <= 504):
+            return ((height-352)/152*-50+200)
+        elif (208 < height <= 352):
+            return ((height-208)/144*-100+300)
+        elif (154 < height <= 208):
+            return ((height-154)/54*-100+400)
+        elif (119 < height <= 154):
+            return ((height-119)/35*-100+500)
+        elif (103 < height <= 119):
+            return ((height-103)/16*-100+600)
+        elif (85 < height <= 103):
+            return ((height-85)/18*-100+700)
+        elif (73 < height <= 85):
+            return ((height-73)/12*-100+800)
+        elif (66 < height <= 73):
+            return ((height-66)/7*-100+900)
+        elif (61 < height <= 66):
+            return ((height-61)/5*-100+1000)
+        else:
+            return (-1)
+
     
 
     MODEL_NAME = args.modeldir
@@ -255,6 +280,19 @@ def usecamera(videotimer):
                     xmin+labelSize[0], label_ymin+baseLine-10), (255, 255, 255), cv2.FILLED)
                 cv2.putText(frame, label, (xmin, label_ymin-7),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)  # Draw label text
+
+
+                # print estimated distance in the top left corner
+                dist = int(distanceestimate(ymax, ymin))
+                distance = '%s: %d %s' % (object_name, dist, ' mm')
+                cv2.putText(frame, distance, (20, (20+i*30)),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
+
+                realadjust = yoffset(xmin, xmax,dist)
+
+                adjustname = '%s: %d %s' % (object_name, realadjust, ' mm')
+                cv2.putText(frame, adjustname, (20, (80)),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
 
                 
 
