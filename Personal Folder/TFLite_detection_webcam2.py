@@ -17,7 +17,26 @@ url = 'http://192.168.50.19:5000/upload'
 CWD_PATH = '/Users/han/Desktop/NTU Courseware/MDP copy/Personal Folder/tflite1/'
 OPEN_WINDOW = True
 
-
+def showimages():
+    blankImg = cv2.imread(f'/Users/han/Desktop/NTU Courseware/MDP copy/Personal Folder/tflite1/images/DONOTDELETE.jpg')
+    filenames = list(glob.glob('/Users/han/Desktop/NTU Courseware/MDP copy/Personal Folder/tflite1/images/*.jpg'))
+    filenames.sort()
+    img=[cv2.imread(file) for file in filenames]
+    for i in range(9):
+        try:
+            dummy=img[i]
+        except:
+            img.append(blankImg)
+            
+    row1 = np.concatenate((img[0],img[1],img[2]), axis=1)
+    row2 = np.concatenate((img[3],img[4],img[5]), axis=1)
+    row3 = np.concatenate((img[6],img[7],blankImg), axis=1)
+    imgTable = np.concatenate((row1, row2, row3), axis=0)
+    table = cv2.resize(imgTable,(1920, 1080))
+    cv2.imshow('table', table)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+   
     
 def usecamera(videotimer):
     global scores
