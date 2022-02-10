@@ -17,6 +17,7 @@ url = 'http://192.168.50.19:5000/upload'
 CWD_PATH = '/Users/han/Desktop/NTU Courseware/MDP copy/Personal Folder/tflite1/'
 OPEN_WINDOW = True
 
+
 def showimages():
     blankImg = cv2.imread(f'/Users/han/Desktop/NTU Courseware/MDP copy/Personal Folder/tflite1/images/DONOTDELETE.jpg')
     filenames = list(glob.glob('/Users/han/Desktop/NTU Courseware/MDP copy/Personal Folder/tflite1/images/*.jpg'))
@@ -36,8 +37,8 @@ def showimages():
     cv2.imshow('table', table)
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-   
     
+
 def usecamera(videotimer):
     global scores
     global scoring
@@ -124,23 +125,24 @@ def usecamera(videotimer):
         if (height>504):
             return (150)
         elif (352 < height <= 504):
-            return ((height-352)/152*-50+200)
+            return ((height-352)/152*-50+200-50)
+            #keep or remove the -50
         elif (208 < height <= 352):
-            return ((height-208)/144*-100+300)
+            return ((height-208)/144*-100+300-50)
         elif (154 < height <= 208):
-            return ((height-154)/54*-100+400)
+            return ((height-154)/54*-100+400-50)
         elif (119 < height <= 154):
-            return ((height-119)/35*-100+500)
+            return ((height-119)/35*-100+500-50)
         elif (103 < height <= 119):
-            return ((height-103)/16*-100+600)
+            return ((height-103)/16*-100+600-50)
         elif (85 < height <= 103):
-            return ((height-85)/18*-100+700)
+            return ((height-85)/18*-100+700-50)
         elif (73 < height <= 85):
-            return ((height-73)/12*-100+800)
+            return ((height-73)/12*-100+800-50)
         elif (66 < height <= 73):
-            return ((height-66)/7*-100+900)
+            return ((height-66)/7*-100+900-50)
         elif (61 < height <= 66):
-            return ((height-61)/5*-100+1000)
+            return ((height-61)/5*-100+1000-50)
         else:
             return (-1)
 
@@ -307,11 +309,7 @@ def usecamera(videotimer):
                 cv2.putText(frame, distance, (20, (20+i*30)),
                             cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
 
-                realadjust = yoffset(xmin, xmax,dist)
-
-                adjustname = '%s: %d %s' % (object_name, realadjust, ' mm')
-                cv2.putText(frame, adjustname, (20, (80)),
-                            cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), 2)
+                
 
                 
 

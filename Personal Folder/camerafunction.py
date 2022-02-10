@@ -1,3 +1,4 @@
 from TFLite_detection_webcam2 import *
-print(usecamera(60))
+print(usecamera(20))
+
 
